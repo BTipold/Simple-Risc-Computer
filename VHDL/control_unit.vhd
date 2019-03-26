@@ -898,9 +898,7 @@ BEGIN
 			
 		WHEN nop =>
 			
-		WHEN halt =>
-			
-			
+		WHEN halt =>		
 			
 		WHEN OTHERS =>
 		END CASE;
