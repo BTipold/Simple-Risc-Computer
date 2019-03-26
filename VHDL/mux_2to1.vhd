@@ -1,18 +1,18 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.all;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.all;
 
-entity mux_2to1 is 
-	port(
-		A	 	 : in  STD_LOGIC_VECTOR(31 downto 0);	
-		B	 	 : in  STD_LOGIC_VECTOR(31 downto 0);		
-		sel	 : in  STD_LOGIC;
-		output : out STD_LOGIC_VECTOR(31 downto 0)	
+ENTITY mux_2to1 IS 
+	PORT(
+		A	: IN  STD_LOGIC_VECTOR(31 DOWNTO 0);	
+		B	: IN  STD_LOGIC_VECTOR(31 DOWNTO 0);		
+		sel	: IN  STD_LOGIC;
+		output 	: OUT STD_LOGIC_VECTOR(31 DOWNTO 0)	
 	);
-end mux_2to1;
+END mux_2to1;
 
-architecture arch of mux_2to1 is		
-begin
-	with sel select
-		output <= 	A when '0',
-						B when others;
+ARCHITECTURE arch OF mux_2to1 IS		
+BEGIN
+	WITH sel SELECT
+		output <=	A WHEN '0',
+				B WHEN OTHERS;
 end arch;
