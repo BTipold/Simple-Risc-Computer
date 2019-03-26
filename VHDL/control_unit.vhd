@@ -8,82 +8,82 @@ USE IEEE.STD_LOGIC_1164.ALL;
 ENTITY control_unit IS
 	PORT (
 		-- CONTROL SIGNALS
-		clock 			: IN  STD_LOGIC;
-      reset 			: IN  STD_LOGIC;
-      stop 				: IN  STD_LOGIC;
-		con_ff			: IN  STD_LOGIC;
-		run				: OUT	STD_LOGIC;
-		clear				: OUT	STD_LOGIC;
-		read_ctrl		: OUT	STD_LOGIC;
-		write_ctrl		: OUT	STD_LOGIC;
-		alu_code			: OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-		op_code			: IN STD_LOGIC_VECTOR(4 DOWNTO 0);
-		rb_in				: IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+		clock 		: IN  STD_LOGIC;
+      		reset 		: IN  STD_LOGIC;
+      		stop 		: IN  STD_LOGIC;
+		con_ff		: IN  STD_LOGIC;
+		run		: OUT STD_LOGIC;
+		clear		: OUT STD_LOGIC;
+		read_ctrl	: OUT STD_LOGIC;
+		write_ctrl	: OUT STD_LOGIC;
+		alu_code	: OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+		op_code		: IN  STD_LOGIC_VECTOR(4 DOWNTO 0);
+		rb_in		: IN  STD_LOGIC_VECTOR(3 DOWNTO 0);
 		
 		-- REGISTER OUT SIGNALS
-      pc_out			: OUT	STD_LOGIC;
-		mdr_out			: OUT	STD_LOGIC;
-		z_hi_out			: OUT	STD_LOGIC;
-		z_lo_out			: OUT	STD_LOGIC;
-		hi_out			: OUT	STD_LOGIC;
-		lo_out			: OUT	STD_LOGIC;
+      		pc_out		: OUT STD_LOGIC;
+		mdr_out		: OUT STD_LOGIC;
+		z_hi_out	: OUT STD_LOGIC;
+		z_lo_out	: OUT STD_LOGIC;
+		hi_out		: OUT STD_LOGIC;
+		lo_out		: OUT STD_LOGIC;
 		immid_val_out	: OUT STD_LOGIC;
-		in_port_out		: OUT STD_LOGIC;
+		in_port_out	: OUT STD_LOGIC;
 		
 		-- REGISTER IN SIGNALS
-      pc_enable		: OUT	STD_LOGIC;
-		mdr_enable		: OUT	STD_LOGIC;
-		mar_enable		: OUT	STD_LOGIC;
-		y_enable			: OUT	STD_LOGIC;
-		z_enable			: OUT	STD_LOGIC;
-		hi_enable		: OUT	STD_LOGIC;
-		lo_enable		: OUT	STD_LOGIC;
-		con_enable		: OUT	STD_LOGIC;
-		ir_enable		: OUT STD_LOGIC;
-		out_port_en		: OUT STD_LOGIC;
-		in_port_en		: OUT STD_LOGIC;
+      		pc_enable	: OUT STD_LOGIC;
+		mdr_enable	: OUT STD_LOGIC;
+		mar_enable	: OUT STD_LOGIC;
+		y_enable	: OUT STD_LOGIC;
+		z_enable	: OUT STD_LOGIC;
+		hi_enable	: OUT STD_LOGIC;
+		lo_enable	: OUT STD_LOGIC;
+		con_enable	: OUT STD_LOGIC;
+		ir_enable	: OUT STD_LOGIC;
+		out_port_en	: OUT STD_LOGIC;
+		in_port_en	: OUT STD_LOGIC;
 		
 		-- REGISTER SELECT LOGIC
-		r_out				: OUT	STD_LOGIC;
-		r_enable			: OUT	STD_LOGIC;
-		g_ra				: OUT STD_LOGIC;
-		g_rb				: OUT STD_LOGIC;
-		g_rc				: OUT STD_LOGIC	
+		r_out		: OUT STD_LOGIC;
+		r_enable	: OUT STD_LOGIC;
+		g_ra		: OUT STD_LOGIC;
+		g_rb		: OUT STD_LOGIC;
+		g_rc		: OUT STD_LOGIC	
 	);
 END control_unit;
 
 ARCHITECTURE arch OF control_unit IS
 
 TYPE state IS (	init, halt, 
-						fetch_instr_0, fetch_instr_1, fetch_instr_2, fetch_instr_3, fetch_instr_4,
-						load, 			load_1,			load_2,			load_3,			load_4,			load_5,
-						load_i, 			load_i_1,		load_i_2,		load_i_3,
-						store, 			store_1,			store_2,			store_3,			store_4,
-						add,	 			add_1, 			add_2,
-						sub, 				sub_1,			sub_2,
-						and_0, 			and_1,			and_2,
-						or_0, 			or_1,				or_2,
-						shift_r, 		shift_r_1,		shift_r_2,
-						shift_r_a, 		shift_r_a_1,	shift_r_a_2,
-						shift_l, 		shift_l_1,		shift_l_2,
-						rotate_r, 		rotate_r_1,		rotate_r_2,
-						rotate_l, 		rotate_l_1,		rotate_l_2,
-						add_i, 			add_i_1, 		add_i_2, 		add_i_3, 		add_i_4, 		add_i_5,
-						or_i, 			or_i_1, 			or_i_2, 			or_i_3, 			or_i_4, 			or_i_5, 
-						and_i, 			and_i_1, 		and_i_2, 		and_i_3, 
-						mul, 				mul_1, 			mul_2, 			mul_3, 
-						divide, 			divide_1, 		divide_2, 		divide_3,
-						negate, 			negate_1, 		negate_2,
-						not_0, 			not_1, 			not_2,
-						branch, 			branch_1,
-						jr,
-						jal, 				jal_1,
-						input,
-						output,
-						mfhi,
-						mflo,
-						nop
-					);
+		fetch_instr_0,	fetch_instr_1, fetch_instr_2, fetch_instr_3, fetch_instr_4,
+		load, load_1, load_2, load_3, load_4, load_5,
+		load_i, load_i_1, load_i_2, load_i_3,
+		store, store_1, store_2, store_3, store_4,
+		add, add_1, add_2,
+		sub, sub_1, sub_2,
+		and_0, and_1, and_2,
+		or_0, or_1, or_2,
+		shift_r, shift_r_1, shift_r_2,
+		shift_r_a, shift_r_a_1,	shift_r_a_2,
+		shift_l, shift_l_1, shift_l_2,
+		rotate_r, rotate_r_1, rotate_r_2,
+		rotate_l, rotate_l_1, rotate_l_2,
+		add_i, add_i_1, add_i_2, add_i_3, add_i_4, add_i_5,
+		or_i, or_i_1, or_i_2, or_i_3, or_i_4, or_i_5, 
+		and_i, and_i_1, and_i_2, and_i_3, 
+		mul, mul_1, mul_2, mul_3, 
+		divide,	divide_1, divide_2, divide_3,
+		negate,	negate_1, negate_2,
+		not_0, not_1, not_2,
+		branch,	branch_1,
+		jr,
+		jal, jal_1,
+		input,
+		output,
+		mfhi,
+		mflo,
+		nop
+);
 						
 SIGNAL present_state: state;
 
@@ -94,7 +94,7 @@ BEGIN
 	IF reset = '1' THEN
 		present_state <= init;
 	ELSIF (rising_edge(clock)) THEN
-		CASE	present_state IS
+		CASE present_state IS
 			WHEN init	=>
 				present_state <= fetch_instr_0;
 			WHEN fetch_instr_0	=>
@@ -371,136 +371,136 @@ PROCESS(present_state)
 BEGIN
 	CASE present_state IS
 		-- INITIALIZE
-		WHEN init	=>
-			run				<=	'1';
-			clear				<=	'1';
+		WHEN init =>
+			run		<= '1';
+			clear		<= '1';
 			
-			pc_out			<=	'0';
-			mdr_out			<=	'0';
-			z_hi_out			<=	'0';
-			z_lo_out			<=	'0';
-			hi_out			<=	'0';
-			lo_out			<=	'0';
-			immid_val_out	<=	'0';
+			pc_out		<= '0';
+			mdr_out		<= '0';
+			z_hi_out	<= '0';
+			z_lo_out	<= '0';
+			hi_out		<= '0';
+			lo_out		<= '0';
+			immid_val_out	<= '0';
 			
-			pc_enable		<=	'0';
-			mdr_enable		<=	'0';
-			mar_enable		<=	'0';
-			y_enable			<=	'0';
-			z_enable			<=	'0';
-			hi_enable		<=	'0';
-			lo_enable		<=	'0';
-			con_enable		<=	'0';
-			ir_enable		<=	'0';
-			out_port_en		<=	'0';
+			pc_enable	<= '0';
+			mdr_enable	<= '0';
+			mar_enable	<= '0';
+			y_enable	<= '0';
+			z_enable	<= '0';
+			hi_enable	<= '0';
+			lo_enable	<= '0';
+			con_enable	<= '0';
+			ir_enable	<= '0';
+			out_port_en	<= '0';
 			
-			r_out				<=	'0';
-			r_enable			<=	'0';
-			g_ra				<=	'0';
-			g_rb				<=	'0';
-			g_rc				<=	'0';
+			r_out		<= '0';
+			r_enable	<= '0';
+			g_ra		<= '0';
+			g_rb		<= '0';
+			g_rc		<= '0';
 			
 		-- FETCH INSTRUCTION
-		WHEN fetch_instr_0	=>
-			write_ctrl		<=	'0';
-			read_ctrl		<=	'0';
-			clear				<= '0';
-			mdr_out			<=	'0';
-			z_hi_out			<=	'0';
-			z_lo_out			<=	'0';
-			hi_out			<=	'0';
-			lo_out			<=	'0';
-			immid_val_out	<=	'0';
-			pc_enable		<=	'0';
-			mdr_enable		<=	'0';
-			y_enable			<=	'0';
-			hi_enable		<=	'0';
-			lo_enable		<=	'0';
-			con_enable		<=	'0';
-			ir_enable		<=	'0';
-			out_port_en		<=	'0';
-			r_out				<=	'0';
-			r_enable			<=	'0';
-			g_ra				<=	'0';
-			g_rb				<=	'0';
-			g_rc				<=	'0';
-			pc_out			<= '1';
-			mar_enable		<= '1';
-			z_enable			<= '1';
-			alu_code			<=	"1100";
-		WHEN fetch_instr_1	=>
-			z_lo_out			<= '1';
-			pc_enable		<= '1';
-			pc_out			<= '0';
-			mar_enable		<= '0';
-			z_enable			<= '0';
-		WHEN fetch_instr_2	=>
-			z_lo_out			<= '0';
-			pc_enable		<= '0';
-			read_ctrl		<= '1';
-			mdr_enable		<= '1';
-		WHEN fetch_instr_3	=>
-			mdr_enable		<= '0';
-			read_ctrl		<= '0';
-			mdr_out			<=	'1';
-			ir_enable		<= '1';
-		WHEN fetch_instr_4	=>
-			mdr_out			<=	'0';
-			ir_enable		<= '0';
+		WHEN fetch_instr_0 =>
+			write_ctrl	<= '0';
+			read_ctrl	<= '0';
+			clear		<= '0';
+			mdr_out		<= '0';
+			z_hi_out	<= '0';
+			z_lo_out	<= '0';
+			hi_out		<= '0';
+			lo_out		<= '0';
+			immid_val_out	<= '0';
+			pc_enable	<= '0';
+			mdr_enable	<= '0';
+			y_enable	<= '0';
+			hi_enable	<= '0';
+			lo_enable	<= '0';
+			con_enable	<= '0';
+			ir_enable	<= '0';
+			out_port_en	<= '0';
+			r_out		<= '0';
+			r_enable	<= '0';
+			g_ra		<= '0';
+			g_rb		<= '0';
+			g_rc		<= '0';
+			pc_out		<= '1';
+			mar_enable	<= '1';
+			z_enable	<= '1';
+			alu_code	<= "1100";
+		WHEN fetch_instr_1 =>
+			z_lo_out	<= '1';
+			pc_enable	<= '1';
+			pc_out		<= '0';
+			mar_enable	<= '0';
+			z_enable	<= '0';
+		WHEN fetch_instr_2 =>
+			z_lo_out	<= '0';
+			pc_enable	<= '0';
+			read_ctrl	<= '1';
+			mdr_enable	<= '1';
+		WHEN fetch_instr_3 =>
+			mdr_enable	<= '0';
+			read_ctrl	<= '0';
+			mdr_out		<= '1';
+			ir_enable	<= '1';
+		WHEN fetch_instr_4 =>
+			mdr_out		<= '0';
+			ir_enable	<= '0';
 			
 		-- LOADS
 		WHEN load	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
 		WHEN load_1	=>
 			immid_val_out	<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0000";
-			g_rb				<= '0';
-			r_out				<= '0';
-			y_enable			<= '0';
+			z_enable	<= '1';
+			alu_code	<= "0000";
+			g_rb		<= '0';
+			r_out		<= '0';
+			y_enable	<= '0';
 		WHEN load_2	=>
-			z_lo_out			<= '1';
-			mar_enable		<= '1';
+			z_lo_out	<= '1';
+			mar_enable	<= '1';
 			immid_val_out	<= '0';
-			z_enable			<= '0';
+			z_enable	<= '0';
 		WHEN load_3	=>
-			read_ctrl		<= '1';
-			mdr_enable		<= '1';
-			z_lo_out			<= '0';
-			mar_enable		<= '0';
+			read_ctrl	<= '1';
+			mdr_enable	<= '1';
+			z_lo_out	<= '0';
+			mar_enable	<= '0';
 		WHEN load_4	=>
-			mdr_out			<=	'1';
-			g_ra				<= '1';
-			r_enable			<= '1';
-			mdr_enable		<= '0';
-			read_ctrl		<= '0';
+			mdr_out		<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
+			mdr_enable	<= '0';
+			read_ctrl	<= '0';
 			
 		-- LOAD IMMIDIATE
 		WHEN load_i	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
 		WHEN load_i_1	=>
 			immid_val_out	<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0000";
-			g_rb				<= '0';
-			r_out				<= '0';
-			y_enable			<= '0';
+			z_enable	<= '1';
+			alu_code	<= "0000";
+			g_rb		<= '0';
+			r_out		<= '0';
+			y_enable	<= '0';
 		WHEN load_i_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
 			immid_val_out	<= '0';
-			z_enable			<= '0';
+			z_enable	<= '0';
 			
 		-- STORE
 		WHEN store	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
 		WHEN store_1	=>
 			immid_val_out	<= '1';
 			z_enable			<= '1';
@@ -892,13 +892,13 @@ BEGIN
 			in_port_out		<= '1';
 			
 		WHEN output		=>
-			r_out			<= '1';
-			g_ra				<= '1';
-			out_port_en		<= '1';
+			r_out		<= '1';
+			g_ra		<= '1';
+			out_port_en	<= '1';
 			
-		WHEN nop			=>
+		WHEN nop =>
 			
-		WHEN halt		=>
+		WHEN halt =>
 			
 			
 			
