@@ -8,11 +8,11 @@ ENTITY ram_module IS
 	PORT
 	(
 		address	: IN STD_LOGIC_VECTOR (8 DOWNTO 0);
-		clock		: IN STD_LOGIC  := '1';
-		data		: IN STD_LOGIC_VECTOR (31 DOWNTO 0);
-		rden		: IN STD_LOGIC  := '1';
-		wren		: IN STD_LOGIC ;
-		q			: OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
+		clock	: IN STD_LOGIC  := '1';
+		data	: IN STD_LOGIC_VECTOR (31 DOWNTO 0);
+		rden	: IN STD_LOGIC  := '1';
+		wren	: IN STD_LOGIC ;
+		q	: OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
 	);
 END ram_module;
 
@@ -20,18 +20,17 @@ ARCHITECTURE arch OF ram_module IS
 	-- SIGNALS
 	TYPE mem IS ARRAY (511 DOWNTO 0) OF STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL memory	: mem;
-	SIGNAL addr		: INTEGER RANGE 0 TO 511;
+	SIGNAL addr	: INTEGER RANGE 0 TO 511;
 	
 	-- FILE IO
-	FILE memory_file 	: TEXT;
-	CONSTANT c_width		: NATURAL := 4;	
+	FILE memory_file : TEXT;
 	
 	BEGIN
 		main_proc: PROCESS(clock, rden, wren, address)
-			VARIABLE new_line	: LINE;
+			VARIABLE new_line 	: LINE;
 			VARIABLE instr		: STD_LOGIC_VECTOR(31 DOWNTO 0);
-			VARIABLE	i			: INTEGER := 0;
-			VARIABLE init	: STD_LOGIC := '1';
+			VARIABLE i		: INTEGER := 0;
+			VARIABLE init		: STD_LOGIC := '1';
 		BEGIN
 			---------------INIT MEMORY---------------------------
 			IF init = '1' THEN
@@ -46,6 +45,7 @@ ARCHITECTURE arch OF ram_module IS
 				init := '0';
 			END IF;
 			-----------------------------------------------------
+				
 			addr	<= CONV_INTEGER(address);
 			IF wren = '1' THEN
 				memory(addr) <= data;
