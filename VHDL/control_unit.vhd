@@ -95,17 +95,17 @@ BEGIN
 		present_state <= init;
 	ELSIF (rising_edge(clock)) THEN
 		CASE present_state IS
-			WHEN init	=>
+			WHEN init =>
 				present_state <= fetch_instr_0;
-			WHEN fetch_instr_0	=>
+			WHEN fetch_instr_0 =>
 				present_state <= fetch_instr_1;
-			WHEN fetch_instr_1	=>
+			WHEN fetch_instr_1 =>
 				present_state <= fetch_instr_2;
-			WHEN fetch_instr_2	=>
+			WHEN fetch_instr_2 =>
 				present_state <= fetch_instr_3;
-			WHEN fetch_instr_3	=>
+			WHEN fetch_instr_3 =>
 				present_state <= fetch_instr_4;
-			WHEN fetch_instr_4	=>
+			WHEN fetch_instr_4 =>
 				CASE op_code IS
 					WHEN "00000" =>
 						present_state <= load;
@@ -168,101 +168,101 @@ BEGIN
 				END CASE;
 				
 				-- LOAD
-				WHEN load	=>
+				WHEN load =>
 					present_state <= load_1;
-				WHEN load_1	=>
+				WHEN load_1 =>
 					present_state <= load_2;
-				WHEN load_2	=>
+				WHEN load_2 =>
 					present_state <= load_3;
-				WHEN load_3	=>
+				WHEN load_3 =>
 					present_state <= load_4;
-				WHEN load_4	=>
+				WHEN load_4 =>
 					present_state <= fetch_instr_0;
 					
 				-- LOAD IMMIDIATE
-				WHEN load_i	=>
+				WHEN load_i =>
 					present_state <= load_i_1;
-				WHEN load_i_1	=>
+				WHEN load_i_1 =>
 					present_state <= load_i_2;
-				WHEN load_i_2	=>
+				WHEN load_i_2 =>
 					present_state <= fetch_instr_0;	
 					
 				-- STORE
-				WHEN store	=>
+				WHEN store =>
 					present_state <= store_1;
-				WHEN store_1	=>
+				WHEN store_1 =>
 					present_state <= store_2;
-				WHEN store_2	=>
+				WHEN store_2 =>
 					present_state <= store_3;
-				WHEN store_3	=>
+				WHEN store_3 =>
 					present_state <= fetch_instr_0;
 				
 				-- ADD
-				WHEN add	=>
+				WHEN add =>
 					present_state <= add_1;
-				WHEN add_1	=>
+				WHEN add_1 =>
 					present_state <= add_2;
-				WHEN add_2	=>
+				WHEN add_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- SUB
-				WHEN sub	=>
+				WHEN sub =>
 					present_state <= sub_1;
-				WHEN sub_1	=>
+				WHEN sub_1 =>
 					present_state <= sub_2;
-				WHEN sub_2	=>
+				WHEN sub_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- OR
-				WHEN or_0	=>
+				WHEN or_0 =>
 					present_state <= or_1;
-				WHEN or_1	=>
+				WHEN or_1 =>
 					present_state <= or_2;
-				WHEN or_2	=>
+				WHEN or_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- AND
-				WHEN and_0	=>
+				WHEN and_0 =>
 					present_state <= and_1;
-				WHEN and_1	=>
+				WHEN and_1 =>
 					present_state <= and_2;
-				WHEN and_2	=>
+				WHEN and_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- SHR
-				WHEN shift_r	=>
+				WHEN shift_r =>
 					present_state <= shift_r_1;
-				WHEN shift_r_1	=>
+				WHEN shift_r_1 =>
 					present_state <= shift_r_2;
-				WHEN shift_r_2	=>
+				WHEN shift_r_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- SHRA
-				WHEN shift_r_a	=>
+				WHEN shift_r_a =>
 					present_state <= shift_r_a_1;
-				WHEN shift_r_a_1	=>
+				WHEN shift_r_a_1 =>
 					present_state <= shift_r_a_2;
-				WHEN shift_r_a_2	=>
+				WHEN shift_r_a_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- SHL
-				WHEN shift_l	=>
+				WHEN shift_l =>
 					present_state <= shift_l_1;
-				WHEN shift_l_1	=>
+				WHEN shift_l_1 =>
 					present_state <= shift_l_2;
-				WHEN shift_l_2	=>
+				WHEN shift_l_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- ROR
-				WHEN rotate_r	=>
+				WHEN rotate_r =>
 					present_state <= rotate_r_1;
-				WHEN rotate_r_1	=>
+				WHEN rotate_r_1 =>
 					present_state <= rotate_r_2;
 				WHEN rotate_r_2	=>
 					present_state <= fetch_instr_0;
 				
 				-- ROL
-				WHEN rotate_l	=>
+				WHEN rotate_l =>
 					present_state <= rotate_l_1;
 				WHEN rotate_l_1	=>
 					present_state <= rotate_l_2;
@@ -270,77 +270,77 @@ BEGIN
 					present_state <= fetch_instr_0;
 					
 				-- ADDI
-				WHEN add_i	=>
+				WHEN add_i =>
 					present_state <= add_i_1;
-				WHEN add_i_1	=>
+				WHEN add_i_1 =>
 					present_state <= add_i_2;
-				WHEN add_i_2	=>
+				WHEN add_i_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- AND I 
-				WHEN and_i	=>
+				WHEN and_i =>
 					present_state <= and_i_1;
-				WHEN and_i_1	=>
+				WHEN and_i_1 =>
 					present_state <= and_i_2;
-				WHEN and_i_2	=>
+				WHEN and_i_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- OR I
-				WHEN or_i	=>
+				WHEN or_i =>
 					present_state <= or_i_1;
-				WHEN or_i_1	=>
+				WHEN or_i_1 =>
 					present_state <= or_i_2;
-				WHEN or_i_2	=>
+				WHEN or_i_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- BRANCH
-				WHEN branch	=>
+				WHEN branch =>
 					present_state <= branch_1;
-				WHEN branch_1	=>
+				WHEN branch_1 =>
 					present_state <= fetch_instr_0;
 					
 				-- MUL
-				WHEN mul	=>
+				WHEN mul =>
 					present_state <= mul_1;
-				WHEN mul_1	=>
+				WHEN mul_1 =>
 					present_state <= mul_2;
-				WHEN mul_2	=>
+				WHEN mul_2 =>
 					present_state <= mul_3;
-				WHEN mul_3	=>
+				WHEN mul_3 =>
 					present_state <= fetch_instr_0;
 					
 				-- DIV
-				WHEN divide	=>
+				WHEN divide =>
 					present_state <= divide_1;
-				WHEN divide_1	=>
+				WHEN divide_1 =>
 					present_state <= divide_2;
-				WHEN divide_2	=>
+				WHEN divide_2 =>
 					present_state <= divide_3;
-				WHEN divide_3	=>
+				WHEN divide_3 =>
 					present_state <= fetch_instr_0;
 					
 				-- NOT
-				WHEN not_0	=>
+				WHEN not_0 =>
 					present_state <= not_1;
-				WHEN not_1	=>
+				WHEN not_1 =>
 					present_state <= not_2;
-				WHEN not_2	=>
+				WHEN not_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- DEG
-				WHEN negate	=>
+				WHEN negate =>
 					present_state <= negate_1;
-				WHEN negate_1	=>
+				WHEN negate_1 =>
 					present_state <= negate_2;
-				WHEN negate_2	=>
+				WHEN negate_2 =>
 					present_state <= fetch_instr_0;
 					
 				-- mfhi
-				WHEN mfhi	=>
+				WHEN mfhi =>
 					present_state <= fetch_instr_0;
 					
 				-- mflo
-				WHEN mflo	=>
+				WHEN mflo =>
 					present_state <= fetch_instr_0;
 					
 				-- jr
@@ -348,17 +348,17 @@ BEGIN
 					present_state <= fetch_instr_0;
 					
 				-- jal
-				WHEN jal	=>
+				WHEN jal =>
 					present_state <= jal_1;
-				WHEN jal_1	=>
+				WHEN jal_1 =>
 					present_state <= fetch_instr_0;
 					
 				-- Nop
-				WHEN nop	=>
+				WHEN nop =>
 					present_state <= fetch_instr_0;
 					
 				-- Nop
-				WHEN halt	=>
+				WHEN halt =>
 					present_state <= halt;
 					
 				WHEN OTHERS =>
@@ -449,28 +449,28 @@ BEGIN
 			ir_enable	<= '0';
 			
 		-- LOADS
-		WHEN load	=>
+		WHEN load =>
 			g_rb		<= '1';
 			r_out		<= '1';
 			y_enable	<= '1';
-		WHEN load_1	=>
+		WHEN load_1 =>
 			immid_val_out	<= '1';
 			z_enable	<= '1';
 			alu_code	<= "0000";
 			g_rb		<= '0';
 			r_out		<= '0';
 			y_enable	<= '0';
-		WHEN load_2	=>
+		WHEN load_2 =>
 			z_lo_out	<= '1';
 			mar_enable	<= '1';
 			immid_val_out	<= '0';
 			z_enable	<= '0';
-		WHEN load_3	=>
+		WHEN load_3 =>
 			read_ctrl	<= '1';
 			mdr_enable	<= '1';
 			z_lo_out	<= '0';
 			mar_enable	<= '0';
-		WHEN load_4	=>
+		WHEN load_4 =>
 			mdr_out		<= '1';
 			g_ra		<= '1';
 			r_enable	<= '1';
@@ -478,18 +478,18 @@ BEGIN
 			read_ctrl	<= '0';
 			
 		-- LOAD IMMIDIATE
-		WHEN load_i	=>
+		WHEN load_i =>
 			g_rb		<= '1';
 			r_out		<= '1';
 			y_enable	<= '1';
-		WHEN load_i_1	=>
+		WHEN load_i_1 =>
 			immid_val_out	<= '1';
 			z_enable	<= '1';
 			alu_code	<= "0000";
 			g_rb		<= '0';
 			r_out		<= '0';
 			y_enable	<= '0';
-		WHEN load_i_2	=>
+		WHEN load_i_2 =>
 			z_lo_out	<= '1';
 			g_ra		<= '1';
 			r_enable	<= '1';
@@ -497,401 +497,401 @@ BEGIN
 			z_enable	<= '0';
 			
 		-- STORE
-		WHEN store	=>
+		WHEN store =>
 			g_rb		<= '1';
 			r_out		<= '1';
 			y_enable	<= '1';
-		WHEN store_1	=>
+		WHEN store_1 =>
 			immid_val_out	<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0000";
-			g_rb				<= '0';
-			r_out				<= '0';
-			y_enable			<= '0';
-		WHEN store_2	=>
-			z_lo_out			<= '1';
-			mar_enable		<= '1';
+			z_enable	<= '1';
+			alu_code	<= "0000";
+			g_rb		<= '0';
+			r_out		<= '0';
+			y_enable	<= '0';
+		WHEN store_2 =>
+			z_lo_out	<= '1';
+			mar_enable	<= '1';
 			immid_val_out	<= '0';
-			z_enable			<= '0';
-		WHEN store_3	=>
-			g_ra				<=	'1';
-			write_ctrl		<=	'1';
-			r_out				<= '1';
-			z_lo_out			<= '0';
-			mar_enable		<= '0';
+			z_enable	<= '0';
+		WHEN store_3 =>
+			g_ra		<= '1';
+			write_ctrl	<= '1';
+			r_out		<= '1';
+			z_lo_out	<= '0';
+			mar_enable	<= '0';
 			
 		-- ADD
-		WHEN add	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN add_1	=>
-			g_rc				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0000";
-			g_rb				<= '0';
-			y_enable			<= '0';
-		WHEN add_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
-			g_rc				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
+		WHEN add =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN add_1 =>
+			g_rc		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+			alu_code	<= "0000";
+			g_rb		<= '0';
+			y_enable	<= '0';
+		WHEN add_2 =>
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
+			g_rc		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
 			
 		-- SUB
-		WHEN sub	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN sub_1	=>
-			g_rc				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0001";
-			g_rb				<= '0';
-			y_enable			<= '0';
-		WHEN sub_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
-			g_rc				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
+		WHEN sub =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN sub_1 =>
+			g_rc		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+			alu_code	<= "0001";
+			g_rb		<= '0';
+			y_enable	<= '0';
+		WHEN sub_2 =>
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
+			g_rc		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
 			
 		-- AND
-		WHEN and_0	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN and_1	=>
-			g_rc				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0100";
-			g_rb				<= '0';
-			y_enable			<= '0';
-		WHEN and_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
-			g_rc				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
+		WHEN and_0 =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN and_1 =>
+			g_rc		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+			alu_code	<= "0100";
+			g_rb		<= '0';
+			y_enable	<= '0';
+		WHEN and_2 =>
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
+			g_rc		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
 			
 		-- OR
-		WHEN or_0	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN or_1	=>
-			g_rc				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0101";
-			g_rb				<= '0';
-			y_enable			<= '0';
-		WHEN or_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
-			g_rc				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
+		WHEN or_0 =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN or_1 =>
+			g_rc		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+			alu_code	<= "0101";
+			g_rb		<= '0';
+			y_enable	<= '0';
+		WHEN or_2 =>
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
+			g_rc		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
 			
 		-- SHR
-		WHEN shift_r	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN shift_r_1	=>
-			g_rc				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0110";
-			g_rb				<= '0';
-			y_enable			<= '0';
-		WHEN shift_r_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
-			g_rc				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
+		WHEN shift_r =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN shift_r_1 =>
+			g_rc		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+			alu_code	<= "0110";
+			g_rb		<= '0';
+			y_enable	<= '0';
+		WHEN shift_r_2 =>
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
+			g_rc		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
 			
 		-- SHRA
-		WHEN shift_r_a	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN shift_r_a_1	=>
-			g_rc				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0111";
-			g_rb				<= '0';
-			y_enable			<= '0';
-		WHEN shift_r_a_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
-			g_rc				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
+		WHEN shift_r_a =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN shift_r_a_1 =>
+			g_rc		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+			alu_code	<= "0111";
+			g_rb		<= '0';
+			y_enable	<= '0';
+		WHEN shift_r_a_2 =>
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
+			g_rc		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
 			
 		-- SHL
-		WHEN shift_l	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN shift_l_1	=>
-			g_rc				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-			alu_code			<= "1000";
-			g_rb				<= '0';
-			y_enable			<= '0';
-		WHEN shift_l_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
-			g_rc				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
+		WHEN shift_l =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN shift_l_1 =>
+			g_rc		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+			alu_code	<= "1000";
+			g_rb		<= '0';
+			y_enable	<= '0';
+		WHEN shift_l_2 =>
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
+			g_rc		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
 			
 		-- ROR
-		WHEN rotate_r	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
+		WHEN rotate_r =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
 		WHEN rotate_r_1	=>
-			g_rc				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-			alu_code			<= "1000";
-			g_rb				<= '0';
-			y_enable			<= '0';
+			g_rc		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+			alu_code	<= "1000";
+			g_rb		<= '0';
+			y_enable	<= '0';
 		WHEN rotate_r_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
-			g_rc				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
+			g_rc		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
 			
 		-- ROL
-		WHEN rotate_l	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
+		WHEN rotate_l =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
 		WHEN rotate_l_1	=>
-			g_rc				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-			alu_code			<= "1000";
-			g_rb				<= '0';
-			y_enable			<= '0';
+			g_rc		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+			alu_code	<= "1000";
+			g_rb		<= '0';
+			y_enable	<= '0';
 		WHEN rotate_l_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
-			g_rc				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
+			g_rc		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
 			
 		-- ADD I
-		WHEN add_i	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN add_i_1	=>
+		WHEN add_i =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN add_i_1 =>
 			immid_val_out	<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0000";
-			r_out				<= '0';
-			g_rb				<= '0';
-			y_enable			<= '0';
-		WHEN add_i_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
+			z_enable	<= '1';
+			alu_code	<= "0000";
+			r_out		<= '0';
+			g_rb		<= '0';
+			y_enable	<= '0';
+		WHEN add_i_2 =>
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
 			immid_val_out	<= '0';
-			z_enable			<= '0';
+			z_enable	<= '0';
 			
 		-- AND I
-		WHEN and_i	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN and_i_1	=>
+		WHEN and_i =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN and_i_1 =>
 			immid_val_out	<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0100";
-			r_out				<= '0';
-			g_rb				<= '0';
-			y_enable			<= '0';
-		WHEN and_i_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
+			z_enable	<= '1';
+			alu_code	<= "0100";
+			r_out		<= '0';
+			g_rb		<= '0';
+			y_enable	<= '0';
+		WHEN and_i_2 =>
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
 			immid_val_out	<= '0';
-			z_enable			<= '0';
+			z_enable	<= '0';
 			
 		-- OR I
-		WHEN or_i	=>
-			g_rb				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN or_i_1	=>
+		WHEN or_i =>
+			g_rb		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN or_i_1 =>
 			immid_val_out	<= '1';
-			z_enable			<= '1';
-			alu_code			<= "0101";
-			r_out				<= '0';
-			g_rb				<= '0';
-			y_enable			<= '0';
-		WHEN or_i_2	=>
-			z_lo_out			<= '1';
-			g_ra				<= '1';
-			r_enable			<= '1';
+			z_enable	<= '1';
+			alu_code	<= "0101";
+			r_out		<= '0';
+			g_rb		<= '0';
+			y_enable	<= '0';
+		WHEN or_i_2 =>
+			z_lo_out	<= '1';
+			g_ra		<= '1';
+			r_enable	<= '1';
 			immid_val_out	<= '0';
-			z_enable			<= '0';
+			z_enable	<= '0';
 			
 		-- Branch
-		WHEN branch	=>
-			con_enable			<= '1';
-			g_ra				<= '1';
-			r_out				<= '1';
-		WHEN branch_1	=>
+		WHEN branch =>
+			con_enable	<= '1';
+			g_ra		<= '1';
+			r_out		<= '1';
+		WHEN branch_1 =>
 			IF con_ff = '1' THEN
 				immid_val_out	<= '1';
 				pc_enable 	<= '1';
 			END IF;
-			con_enable		<= '0';
-			g_ra				<= '0';
-			r_out				<= '0';
+			con_enable	<= '0';
+			g_ra		<= '0';
+			r_out		<= '0';
 		
 		-- MULTIPLY
-		WHEN mul	=>
-			g_ra				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN mul_1	=>
-			alu_code			<= "0010";
-			g_rb				<= '1';
-			z_enable			<= '1';
-			g_ra				<= '0';
-			y_enable			<= '0';
-			r_out				<= '1';
-		WHEN mul_2	=>
-			z_hi_out			<= '1';
-			hi_enable		<= '1';
-			g_rb				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
-		WHEN mul_3	=>
-			z_lo_out			<= '1';
-			lo_enable		<= '1';
-			z_hi_out			<= '0';
-			hi_enable		<= '0';
+		WHEN mul =>
+			g_ra		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN mul_1 =>
+			alu_code	<= "0010";
+			g_rb		<= '1';
+			z_enable	<= '1';
+			g_ra		<= '0';
+			y_enable	<= '0';
+			r_out		<= '1';
+		WHEN mul_2 =>
+			z_hi_out	<= '1';
+			hi_enable	<= '1';
+			g_rb		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
+		WHEN mul_3 =>
+			z_lo_out	<= '1';
+			lo_enable	<= '1';
+			z_hi_out	<= '0';
+			hi_enable	<= '0';
 		
 		-- DIVIDE
-		WHEN divide	=>
-			g_ra				<= '1';
-			r_out				<= '1';
-			y_enable			<= '1';
-		WHEN divide_1	=>
-			alu_code			<= "0011";
-			g_rb				<= '1';
-			z_enable			<= '1';
-			g_ra				<= '0';
-			y_enable			<= '0';
-			r_out				<= '1';
-		WHEN divide_2	=>
-			z_hi_out			<= '1';
-			hi_enable		<= '1';
-			g_rb				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
-		WHEN divide_3	=>
-			z_lo_out			<= '1';
-			lo_enable		<= '1';
-			z_hi_out			<= '0';
-			hi_enable		<= '0';
+		WHEN divide =>
+			g_ra		<= '1';
+			r_out		<= '1';
+			y_enable	<= '1';
+		WHEN divide_1 =>
+			alu_code	<= "0011";
+			g_rb		<= '1';
+			z_enable	<= '1';
+			g_ra		<= '0';
+			y_enable	<= '0';
+			r_out		<= '1';
+		WHEN divide_2 =>
+			z_hi_out	<= '1';
+			hi_enable	<= '1';
+			g_rb		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
+		WHEN divide_3 =>
+			z_lo_out	<= '1';
+			lo_enable	<= '1';
+			z_hi_out	<= '0';
+			hi_enable	<= '0';
 			
 		-- NEGATE
-		WHEN negate	=>
-			alu_code			<= "1101";
-			g_rb				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-		WHEN negate_1	=>
-			g_ra				<= '1';
-			r_enable			<= '1';
-			z_lo_out			<= '1';
-			g_rb				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
-		WHEN negate_2	=>	
-			z_hi_out			<= '1';
-			hi_enable		<= '1';
-			r_enable			<= '0';
-			g_ra				<= '0';
-			z_lo_out			<= '0';
+		WHEN negate =>
+			alu_code	<= "1101";
+			g_rb		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+		WHEN negate_1 =>
+			g_ra		<= '1';
+			r_enable	<= '1';
+			z_lo_out	<= '1';
+			g_rb		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
+		WHEN negate_2 =>	
+			z_hi_out	<= '1';
+			hi_enable	<= '1';
+			r_enable	<= '0';
+			g_ra		<= '0';
+			z_lo_out	<= '0';
 			
 		-- NOT
-		WHEN not_0	=>
-			alu_code			<= "1110";
-			g_rb				<= '1';
-			r_out				<= '1';
-			z_enable			<= '1';
-		WHEN not_1	=>
-			g_ra				<= '1';
-			r_enable			<= '1';
-			z_lo_out			<= '1';
-			g_rb				<= '0';
-			r_out				<= '0';
-			z_enable			<= '0';
-		WHEN not_2	=>	
-			z_hi_out			<= '1';
-			hi_enable		<= '1';
-			r_enable			<= '0';
-			g_ra				<= '0';
-			z_lo_out			<= '0';
+		WHEN not_0 =>
+			alu_code	<= "1110";
+			g_rb		<= '1';
+			r_out		<= '1';
+			z_enable	<= '1';
+		WHEN not_1 =>
+			g_ra		<= '1';
+			r_enable	<= '1';
+			z_lo_out	<= '1';
+			g_rb		<= '0';
+			r_out		<= '0';
+			z_enable	<= '0';
+		WHEN not_2 =>	
+			z_hi_out	<= '1';
+			hi_enable	<= '1';
+			r_enable	<= '0';
+			g_ra		<= '0';
+			z_lo_out	<= '0';
 			
-		WHEN jr		=>
-			pc_enable		<=	'1';
-			r_out			<=	'1';
-			g_ra				<= '1';
+		WHEN jr	=>
+			pc_enable	<= '1';
+			r_out		<= '1';
+			g_ra		<= '1';
 			
-		WHEN jal		=>
-			pc_out			<=	'1';
-			g_rb				<= '1';
-			r_enable			<=	'1';
-		WHEN jal_1		=>
-			pc_enable		<=	'1';
-			r_out				<=	'1';
-			g_ra				<= '1';
-			pc_out			<=	'0';
-			g_rb				<= '0';
-			r_enable			<=	'0';
+		WHEN jal =>
+			pc_out		<= '1';
+			g_rb		<= '1';
+			r_enable	<= '1';
+		WHEN jal_1 =>
+			pc_enable	<= '1';
+			r_out		<= '1';
+			g_ra		<= '1';
+			pc_out		<= '0';
+			g_rb		<= '0';
+			r_enable	<= '0';
 			
-		WHEN mfhi		=>
-			r_enable		<= '1';
-			g_ra				<= '1';
-			hi_out			<= '1';
+		WHEN mfhi =>
+			r_enable	<= '1';
+			g_ra		<= '1';
+			hi_out		<= '1';
 			
-		WHEN mflo		=>
-			r_enable		<= '1';
-			g_ra				<= '1';
-			lo_out			<= '1';
+		WHEN mflo =>
+			r_enable	<= '1';
+			g_ra		<= '1';
+			lo_out		<= '1';
 			
-		WHEN input		=>
-			r_enable		<= '1';
-			g_ra				<= '1';
-			in_port_out		<= '1';
+		WHEN input =>
+			r_enable	<= '1';
+			g_ra		<= '1';
+			in_port_out	<= '1';
 			
-		WHEN output		=>
+		WHEN output =>
 			r_out		<= '1';
 			g_ra		<= '1';
 			out_port_en	<= '1';
