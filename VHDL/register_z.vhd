@@ -1,42 +1,57 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.all;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.all;
 
 -- ENTITY DECLARATION
-entity register_z is 
-	port(
-		alu_out : in  STD_LOGIC_VECTOR(63 downto 0);
-		z_lo	  : out STD_LOGIC_VECTOR(31 downto 0);
-		z_hi	  : out STD_LOGIC_VECTOR(31 downto 0);
-		z_en    : in  STD_LOGIC;
-		clock	  : in  STD_LOGIC;
-		clear	  : in  STD_LOGIC
+ENTITY register_z IS 
+	PORT(
+		alu_out : IN  STD_LOGIC_VECTOR(63 DOWNTO 0);
+		z_lo	: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		z_hi	: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		z_en	: IN  STD_LOGIC;
+		clock	: IN  STD_LOGIC;
+		clear	: IN  STD_LOGIC
 	);
-end register_z;
+END register_z;
 
 
 -- ARHCITECTURE
-architecture arch of register_z is
+ARCHITECTURE arch OF register_z IS
 
 -- CREATE A 32 BIT REGISTER COMPONENT
-component register_32
-	port(
-		D	 : in  STD_LOGIC_VECTOR(31 downto 0);
-		q	 :	out STD_LOGIC_VECTOR(31 downto 0);
-		en  : in  STD_LOGIC;
-		clk :	in	 STD_LOGIC;
-		clr : in  STD_LOGIC
+COMPONENT register_32
+	PORT(
+		D   : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
+		q   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		en  : IN  STD_LOGIC;
+		clk : IN  STD_LOGIC;
+		clr : IN  STD_LOGIC
 	);
-end component;
+END COMPONENT;
 
 --SIGNALS
-signal upper_bits : STD_LOGIC_VECTOR(31 downto 0);
-signal lower_bits : STD_LOGIC_VECTOR(31 downto 0);
+SIGNAL upper_bits : STD_LOGIC_VECTOR(31 DOWNTO 0);
+SIGNAL lower_bits : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 --CREATE ARCHITECTURE
-begin
-	upper_bits <= alu_out(63 downto 32);
-	lower_bits <= alu_out(31 downto 0);
-	z_hi_reg : register_32 port map (D=>upper_bits, Q=>z_hi, en=>z_en, clk=>clock, clr=>clear);
-	z_lo_reg : register_32 port map (D=>lower_bits, Q=>z_lo, en=>z_en, clk=>clock, clr=>clear);
-end arch;	
+BEGIN
+	upper_bits <= alu_out(63 DOWNTO 32);
+	lower_bits <= alu_out(31 DOWNTO 0);
+	z_hi_reg : register_32
+	PORT MAP (
+		D   => upper_bits,
+		Q   => z_hi,
+		en  => z_en,
+		clk => clock,
+		clr => clear
+	);
+		
+	z_lo_reg : register_32
+	PORT MAP (
+		D    => lower_bits,
+		Q    => z_lo,
+		en   => z_en,
+		clk  => clock,
+		clr  => clear
+	);
+END arch;	
 		
